@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Polymarket Times - Prediction Market News</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <h1>THE POLYMARKET TIMES</h1>
+                    <p class="tagline">News from the Future of Prediction Markets</p>
+                </div>
+                <nav class="main-nav">
+                    <a href="/">Home</a>
+                    <a href="#politics">Politics</a>
+                    <a href="#economics">Economics</a>
+                    <a href="#technology">Technology</a>
+                    <a href="#sports">Sports</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Article -->
+    <% if (featured) { %>
+    <section class="featured-section">
+        <div class="container">
+            <article class="featured-article">
+                <div class="featured-content">
+                    <span class="category-tag"><%= featured.category %></span>
+                    <h2 class="featured-title"><%= featured.title %></h2>
+                    <p class="featured-summary"><%= featured.summary %></p>
+                    <div class="featured-meta">
+                        <span class="probability">Probability: <strong><%= featured.probability %>%</strong></span>
+                        <span class="volume">Volume: $<%= (featured.volume / 1000).toFixed(1) %>K</span>
+                        <a href="/article/<%= featured.id %>" class="read-more">Read Analysis →</a>
+                    </div>
+                </div>
+                <% if (featured.image) { %>
+                <div class="featured-image">
+                    <img src="<%= featured.image %>" alt="<%= featured.title %>">
+                </div>
+                <% } %>
+            </article>
+        </div>
+    </section>
+    <% } %>
+
+    <!-- Articles Grid -->
+    <section class="articles-section">
+        <div class="container">
+            <div class="articles-grid">
+                <% articles.forEach((article, index) => { %>
+                    <% if (index > 0) { %>
+                    <article class="article-card">
+                        <% if (article.image) { %>
+                        <div class="article-image">
+                            <img src="<%= article.image %>" alt="<%= article.title %>">
+                            <span class="category-badge"><%= article.category %></span>
+                        </div>
+                        <% } %>
+                        <div class="article-content">
+                            <h3 class="article-title"><%= article.title %></h3>
+                            <p class="article-summary"><%= article.summary.substring(0, 150) %>...</p>
+                            <div class="article-meta">
+                                <div class="prediction-stats">
+                                    <span class="stat">
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M8 1L10.5 6L16 7L12 11L13 16L8 13.5L3 16L4 11L0 7L5.5 6L8 1Z" fill="currentColor"/>
+                                        </svg>
+                                        <%= article.probability %>%
+                                    </span>
+                                    <span class="stat">Vol: $<%= (article.volume / 1000).toFixed(0) %>K</span>
+                                </div>
+                                <a href="/article/<%= article.id %>" class="article-link">Read more →</a>
+                            </div>
+                        </div>
+                    </article>
+                    <% } %>
+                <% }) %>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>The Polymarket Times</h4>
+                    <p>AI-powered news from prediction markets</p>
+                </div>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <p>We analyze prediction markets to bring you insights on future events.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Data Source</h4>
+                    <p>Powered by <a href="https://polymarket.com" target="_blank">Polymarket</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Polymarket Times. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

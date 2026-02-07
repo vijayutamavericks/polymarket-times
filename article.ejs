@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= article.title %> - The Polymarket Times</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <h1>THE POLYMARKET TIMES</h1>
+                    <p class="tagline">News from the Future of Prediction Markets</p>
+                </div>
+                <nav class="main-nav">
+                    <a href="/">Home</a>
+                    <a href="#politics">Politics</a>
+                    <a href="#economics">Economics</a>
+                    <a href="#technology">Technology</a>
+                    <a href="#sports">Sports</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <article class="article-page">
+        <div class="container article-container">
+            <div class="article-header">
+                <span class="category-tag"><%= article.category %></span>
+                <h1 class="article-page-title"><%= article.title %></h1>
+                <div class="article-page-meta">
+                    <time><%= new Date(article.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) %></time>
+                </div>
+            </div>
+
+            <% if (article.image) { %>
+            <div class="article-page-image">
+                <img src="<%= article.image %>" alt="<%= article.title %>">
+            </div>
+            <% } %>
+
+            <div class="article-body">
+                <div class="prediction-box">
+                    <h3>Market Overview</h3>
+                    <div class="prediction-stats-large">
+                        <div class="stat-item">
+                            <span class="stat-label">Current Probability</span>
+                            <span class="stat-value"><%= article.probability %>%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Trading Volume</span>
+                            <span class="stat-value">$<%= (article.volume / 1000).toFixed(1) %>K</span>
+                        </div>
+                    </div>
+                    <a href="<%= article.marketUrl %>" target="_blank" class="market-link">View on Polymarket →</a>
+                </div>
+
+                <div class="article-content-body">
+                    <p class="lead"><%= article.summary %></p>
+                    
+                    <h2>Market Analysis</h2>
+                    <p>This prediction market is tracking: <strong><%= article.title %></strong></p>
+                    
+                    <p>With a current probability of <strong><%= article.probability %>%</strong>, traders in the prediction market are showing <%= parseFloat(article.probability) > 50 ? 'strong confidence' : 'significant uncertainty' %> about this outcome.</p>
+
+                    <h2>What This Means</h2>
+                    <p>Prediction markets aggregate the collective wisdom of traders who put real money behind their forecasts. This market has seen $<%= (article.volume / 1000).toFixed(1) %>K in trading volume, indicating <%= article.volume > 10000 ? 'high' : 'moderate' %> interest from the forecasting community.</p>
+
+                    <h2>Historical Context</h2>
+                    <p>Polymarket has become one of the leading platforms for forecasting future events, with traders using real money to predict outcomes across politics, economics, sports, and culture. The platform's track record shows that markets with high trading volume tend to be more accurate predictors than traditional polls or expert forecasts.</p>
+
+                    <div class="callout">
+                        <p><strong>Note:</strong> Prediction markets show probability based on real-money trades, but they are not guarantees of future outcomes. Markets can shift rapidly based on new information.</p>
+                    </div>
+
+                    <h2>Trade This Market</h2>
+                    <p>If you have insights into this question, you can participate in the prediction market on Polymarket. Successful traders not only profit from correct predictions but also contribute to more accurate collective forecasts.</p>
+                </div>
+            </div>
+
+            <div class="article-footer">
+                <a href="/" class="back-link">← Back to All Articles</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>The Polymarket Times</h4>
+                    <p>AI-powered news from prediction markets</p>
+                </div>
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <p>We analyze prediction markets to bring you insights on future events.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Data Source</h4>
+                    <p>Powered by <a href="https://polymarket.com" target="_blank">Polymarket</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Polymarket Times. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
